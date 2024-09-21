@@ -1,0 +1,21 @@
+<h6 class="separator">Lista de Compra</h6>
+
+<div class="product-list">
+  <div *ngFor="let product of products; let indice = index;" class="product-item">
+    <div class="product-header">
+      <p class="product-title">{{ product.title }}</p>
+      <p class="product-price">${{ product.price }}</p>
+    </div>
+    <div class="product-actions">
+      <button (click)="onClickDelete(indice)" class="delete-button">X</button>
+      <p class="product-description">{{ product.description }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="total-container">
+  <div class="subtitulo">
+    <p class="titulo">Total:</p>
+    <app-total></app-total>
+  </div>
+</div>

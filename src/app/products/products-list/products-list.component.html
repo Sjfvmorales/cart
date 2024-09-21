@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow-lg sticky-navbar">
+  <div class="container">
+    <form class="d-flex" role="search">
+      <input class="form-control custom-input" type="text" placeholder="Filtro por nombre" aria-label="Search"
+        id="search-Value" [(ngModel)]="searchValue" name="search">
+    </form>
+    <p class="mb-0">Mostrando <strong>{{(productList | filter:searchValue).length}}</strong> productos de un total de
+      <strong>{{productList.length}}</strong>
+    </p>
+  </div>
+</nav>
+<div class="container text-center">
+  <div class="row justify-content-start">
+    <div class="col-10">
+      <div class="container text-center">
+        <div class="row justify-content-start">
+          <div *ngFor="let product of productList | filter: searchValue; trackBy: trackByProductId"
+            class="card col-md-4 ms-auto" style="width: 18rem;">
+            <div class="card-header">
+              <h5 class="card-title">{{ product.title }}</h5>
+              <hr class="separator">
+              <p class="ref-price">
+                <span>Ref: {{ product.id }}</span>
+                <span class="price">${{ product.price }}</span>
+              </p>
+            </div>
+            <img [src]="product.image" class="card-img-top" alt="{{ product.title }}">
+            <div class="card-body">
+              <p class="card-text description">{{ product.description }}</p>
+              <div class="category-rating">
+                <p class="card-text">
+                  <strong>Categoría:</strong> {{ product.category }}
+                </p>
+                <p class="card-text">
+                  <strong>Rating:</strong> {{ product.rating.rate }} ({{ product.rating.count }} reviews)
+                </p>
+              </div>
+              <a class="btn btn-outline-primary" (click)="onClick(product)">COMPRAR</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-1 sticky-carrito">
+      <app-cart />
+    </div>
+  </div>
+</div>
